@@ -68,7 +68,7 @@ from tqdm import tqdm
 from spacy.training import Example
 from spacy.util import minibatch, compounding
 import concurrent.futures
-spacy.require_gpu()
+# spacy.require_gpu()
 # Initialize spaCy model
 nlp = spacy.blank("en")
 # nlp = spacy.load("en_core_web_sm")
@@ -89,10 +89,7 @@ def process_file(filename):
             annotated_entities = []
             for entity in entities:
                 # Keep 10% of the entities with type 'Skill'
-                if entity['type'] == 'Skill' and random.random() > 0.9:
-                    annotated_entities.append((entity['start_idx'], entity['end_idx'], entity['type']))
-                # Keep all entities that are not of type 'Skill'
-                elif entity['type'] != 'Skill':
+                if entity['type'] == 'Job Title':
                     annotated_entities.append((entity['start_idx'], entity['end_idx'], entity['type']))
             local_train_data.append((text, {'entities': annotated_entities}))
         return local_train_data
@@ -135,5 +132,5 @@ with nlp.disable_pipes(*unaffected_pipes):
         print(f"Iteration {itn}, Losses: {losses}")
 
 # Save model to disk
-nlp.to_disk("ner_model_2")
+nlp.to_disk("ner_model_job_titles")
 print("Model saved to disk.")
