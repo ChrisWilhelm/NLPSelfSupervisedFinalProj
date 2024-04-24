@@ -68,10 +68,9 @@ from tqdm import tqdm
 from spacy.training import Example
 from spacy.util import minibatch, compounding
 import concurrent.futures
-# spacy.require_gpu()
+
 # Initialize spaCy model
 nlp = spacy.blank("en")
-# nlp = spacy.load("en_core_web_sm")
 ner = nlp.add_pipe("ner")
 
 # Process JSON data from all files in the folder in parallel
@@ -88,8 +87,7 @@ def process_file(filename):
             entities = item['entities']
             annotated_entities = []
             for entity in entities:
-                # Keep 10% of the entities with type 'Skill'
-                if entity['type'] == 'Job Title':
+                if entity['type'] == 'Degree':
                     annotated_entities.append((entity['start_idx'], entity['end_idx'], entity['type']))
             local_train_data.append((text, {'entities': annotated_entities}))
         return local_train_data
@@ -115,7 +113,7 @@ unaffected_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptio
 with nlp.disable_pipes(*unaffected_pipes):
     optimizer = nlp.begin_training()
     batch_sizes = compounding(4.0, 32.0, 1.001)  # Dynamically compounding batch sizes
-    for itn in (range(10)):
+    for itn in (range(5)):
         random.shuffle(train_data)
         losses = {}
         batches = minibatch(train_data, size=batch_sizes)
@@ -132,5 +130,5 @@ with nlp.disable_pipes(*unaffected_pipes):
         print(f"Iteration {itn}, Losses: {losses}")
 
 # Save model to disk
-nlp.to_disk("ner_model_job_titles")
+nlp.to_disk("ner_model_degree2")
 print("Model saved to disk.")

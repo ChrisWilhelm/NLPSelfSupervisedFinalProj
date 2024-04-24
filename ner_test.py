@@ -1,8 +1,8 @@
 import spacy
 
-nlp = spacy.load("ner_model_job_titles")
+nlp = spacy.load("ner_model_degree2")
 
-file = open("resume_579.txt", encoding="utf-8")
+file = open("resume_1274.txt", encoding="utf-8")
 
 lines = file.read()
 
