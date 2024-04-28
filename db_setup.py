@@ -15,9 +15,12 @@ def execute_sql_files(connection, sql_files_dir):
 if __name__ == "__main__":
     postgres_url = "postgres://tjzpfemc:Jqbyuxw_xlwyrqxHCPUjarS0RDYEonUz@fanny.db.elephantsql.com/tjzpfemc"
     sql_files_dir = "./databaseFiles"
+    schema_name = "public"  # Change this to "public"
     try:
         connection = psycopg2.connect(postgres_url)
-        print("Connected to the database")        
+        print("Connected to the database")
+        
+        # Optionally, execute other SQL files
         execute_sql_files(connection, sql_files_dir)
     except psycopg2.Error as e:
         print("Error connecting to PostgreSQL:", e)

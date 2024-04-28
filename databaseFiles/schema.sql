@@ -1,3 +1,15 @@
+DROP TABLE IF EXISTS "public"."Resume" CASCADE;
+DROP TABLE IF EXISTS "public"."Degree" CASCADE;
+DROP TABLE IF EXISTS "public"."College" CASCADE;
+DROP TABLE IF EXISTS "public"."Skills" CASCADE;
+DROP TABLE IF EXISTS "public"."JobTitle" CASCADE;
+DROP TABLE IF EXISTS "public"."Company" CASCADE;
+DROP TABLE IF EXISTS "public"."Resume_College" CASCADE;
+DROP TABLE IF EXISTS "public"."Resume_Skill" CASCADE;
+DROP TABLE IF EXISTS "public"."Experience" CASCADE;
+
+
+
 CREATE TABLE IF NOT EXISTS "Resume" (
   "resume_id" SERIAL PRIMARY KEY,
   "resume_text" TEXT
@@ -5,25 +17,25 @@ CREATE TABLE IF NOT EXISTS "Resume" (
 
 CREATE TABLE IF NOT EXISTS "Degree" (
   "degree_id" SERIAL PRIMARY KEY,
-  "degree_name" VARCHAR(100)
+  "degree_name" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "College" (
   "college_id" SERIAL PRIMARY KEY,
-  "college_name" VARCHAR(100),
-  "location" VARCHAR(100)
+  "college_name" TEXT,
+  "location" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "Skills" (
   "skill_id" SERIAL PRIMARY KEY,
-  "skill_name" VARCHAR(100)
+  "skill_name" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "Resume_College" (
   "resume_id" INT,
   "college_id" INT,
   "degree_id" INT,
-  PRIMARY KEY (resume_id, college_id)
+  PRIMARY KEY (resume_id, college_id, degree_id)
 );
 
 CREATE TABLE IF NOT EXISTS "Resume_Skill" (
@@ -34,12 +46,12 @@ CREATE TABLE IF NOT EXISTS "Resume_Skill" (
 
 CREATE TABLE IF NOT EXISTS "JobTitle" (
   "job_title_id" SERIAL PRIMARY KEY,
-  "title_name" VARCHAR(100)
+  "title_name" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "Company" (
   "company_id" SERIAL PRIMARY KEY,
-  "company_name" VARCHAR(100)
+  "company_name" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "Experience" (
