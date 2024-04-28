@@ -16,6 +16,8 @@ for ent in labels.ents:
     else:
         label_dict[ent.label_] = 1
     print(ent.label_, ent.text)
+    print('')
+    print('')
 
 for key in label_dict.keys():
     print(key, label_dict[key])
