@@ -87,7 +87,7 @@ def process_file(filename):
             entities = item['entities']
             annotated_entities = []
             for entity in entities:
-                if entity['type'] == 'Degree':
+                if entity['type'] == 'Skill':
                     annotated_entities.append((entity['start_idx'], entity['end_idx'], entity['type']))
             local_train_data.append((text, {'entities': annotated_entities}))
         return local_train_data
@@ -113,7 +113,7 @@ unaffected_pipes = [pipe for pipe in nlp.pipe_names if pipe not in pipe_exceptio
 with nlp.disable_pipes(*unaffected_pipes):
     optimizer = nlp.begin_training()
     batch_sizes = compounding(4.0, 32.0, 1.001)  # Dynamically compounding batch sizes
-    for itn in (range(5)):
+    for itn in (range(35)):
         random.shuffle(train_data)
         losses = {}
         batches = minibatch(train_data, size=batch_sizes)
@@ -130,5 +130,5 @@ with nlp.disable_pipes(*unaffected_pipes):
         print(f"Iteration {itn}, Losses: {losses}")
 
 # Save model to disk
-nlp.to_disk("ner_model_degree2")
+nlp.to_disk("resumeModels/ner_model_skills_35")
 print("Model saved to disk.")

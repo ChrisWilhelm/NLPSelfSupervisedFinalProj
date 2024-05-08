@@ -1,8 +1,8 @@
 import spacy
 
-nlp = spacy.load("./resumeModels/ner_model_degree")
+nlp = spacy.load("./resumeModels/ner_model_YOE_10")
 
-file = open("resume_1274.txt", encoding="utf-8")
+file = open("resume_579.txt", encoding="utf-8")
 
 lines = file.read()
 
@@ -17,7 +17,6 @@ for ent in labels.ents:
         label_dict[ent.label_] = 1
     print(ent.label_, ent.text)
     print('')
-    print('')
 
-for key in label_dict.keys():
-    print(key, label_dict[key])
+# for key in label_dict.keys():
+#     print(key, label_dict[key])
