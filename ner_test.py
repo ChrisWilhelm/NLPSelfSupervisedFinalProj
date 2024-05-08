@@ -1,6 +1,10 @@
 import spacy
 
+<<<<<<< Updated upstream
 nlp = spacy.load("./resumeModels/ner_model_YOE_10")
+=======
+nlp = spacy.load("ner_model_job_titles_2")
+>>>>>>> Stashed changes
 
 file = open("resume_579.txt", encoding="utf-8")
 
