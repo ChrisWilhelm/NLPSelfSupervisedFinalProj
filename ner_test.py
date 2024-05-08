@@ -1,10 +1,6 @@
 import spacy
 
-<<<<<<< Updated upstream
-nlp = spacy.load("./resumeModels/ner_model_YOE_10")
-=======
-nlp = spacy.load("ner_model_job_titles_2")
->>>>>>> Stashed changes
+nlp = spacy.load("ner_model_degree2")
 
 file = open("resume_579.txt", encoding="utf-8")
 
@@ -20,7 +16,6 @@ for ent in labels.ents:
     else:
         label_dict[ent.label_] = 1
     print(ent.label_, ent.text)
-    print('')
 
 # for key in label_dict.keys():
 #     print(key, label_dict[key])
