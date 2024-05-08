@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS "Degree" (
 
 CREATE TABLE IF NOT EXISTS "College" (
   "college_id" SERIAL PRIMARY KEY,
-  "college_name" TEXT,
-  "location" TEXT
+  "college_name" TEXT
+  -- "location" TEXT
 );
 
 CREATE TABLE IF NOT EXISTS "Skills" (
