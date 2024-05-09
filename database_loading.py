@@ -28,7 +28,8 @@ def find_closest_position(entity_positions, target_position):
             closest_position = position
     return closest_position
 
-DATABASE_URL = "postgres://tjzpfemc:Jqbyuxw_xlwyrqxHCPUjarS0RDYEonUz@fanny.db.elephantsql.com/tjzpfemc"
+# DATABASE_URL = "postgres://tjzpfemc:Jqbyuxw_xlwyrqxHCPUjarS0RDYEonUz@fanny.db.elephantsql.com/tjzpfemc"
+DATABASE_URL = "postgres://myuser:mypassword@localhost:5432/mydatabase"
 conn = psycopg2.connect(DATABASE_URL)
 cur = conn.cursor()
 
@@ -49,7 +50,6 @@ for filename in tqdm(os.listdir("./TestDocs")):
     resume_id = int(filename.split('_')[1])
     if corpus == "d2":
         resume_id += 20000
-
     cur.execute('INSERT INTO "public"."Resume" (resume_id, resume_text) VALUES (%s, %s) RETURNING resume_id', (resume_id, resume_text,))
     resume_id = cur.fetchone()[0]
 
