@@ -1,0 +1,74 @@
+[
+  {
+    "question": "Find all resumes that have both python and java as a skill",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs1 ON r.resume_id = rs1.resume_id JOIN \"Skills\" s1 ON rs1.skill_id = s1.skill_id AND s1.skill_name = 'Python' JOIN \"Resume_Skill\" rs2 ON r.resume_id = rs2.resume_id JOIN \"Skills\" s2 ON rs2.skill_id = s2.skill_id AND s2.skill_name = 'Java';"
+  },
+  {
+    "question": "Get all resumes with at least one former job",
+    "query": "SELECT r.resume_id, r.resume_text, COUNT(e.experience_id) as experience_count FROM \"Resume\" as r JOIN \"Experience\" e ON r.resume_id = e.resume_id GROUP BY r.resume_id HAVING COUNT(e.experience_id) > 0;"
+  },
+  {
+    "question": "Find all applicants who worked at at&t",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Experience\" e ON r.resume_id = e.resume_id JOIN \"Company\" c ON e.company_id = c.company_id WHERE c.company_name = 'AT&T';"
+  },
+  {
+    "question": "Retrieve resumes that have problem solving as a skill",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs ON r.resume_id = rs.resume_id JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name = 'Problem Solving';"
+  },
+  {
+    "question": "How many applicants have experience in sales and marketing",
+    "query": "SELECT COUNT(DISTINCT r.resume_id) AS num_applicants FROM \"Resume\" r WHERE r.resume_id IN (SELECT rs.resume_id FROM \"Resume_Skill\" rs JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('Sales', 'Marketing') GROUP BY rs.resume_id HAVING COUNT(DISTINCT s.skill_name) = 2) OR r.resume_id IN (SELECT e.resume_id FROM \"Experience\" e JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE (jt.title_name ILIKE '%sales%') AND (jt.title_name ILIKE '%marketing%'));"
+  },
+  {
+    "question": "Get me applicants with a law degree",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_College\" rc ON r.resume_id = rc.resume_id JOIN \"Degree\" d ON rc.degree_id = d.degree_id WHERE d.degree_name ILIKE '%law%' or d.degree_name ILIKE '%j.d%';"
+  },
+  {
+    "question": "Find all vice president applicants",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Experience\" e ON r.resume_id = e.resume_id JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE jt.title_name ILIKE '%vice president%' OR jt.title_name ILIKE '%v.p.%';"
+  },
+  {
+    "question": "Get me applicants with a master's degree",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_College\" rc ON r.resume_id = rc.resume_id JOIN \"Degree\" d ON rc.degree_id = d.degree_id WHERE d.degree_name ILIKE '%master%' OR d.degree_name ILIKE '%m.s.%';"
+  },
+  {
+    "question": "Find all software engineers",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Experience\" e ON r.resume_id = e.resume_id JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE jt.title_name ILIKE '%software engineer%' OR jt.title_name ILIKE '%software developer%';"
+  },
+  {
+    "question": "Get me applicants with a bachelor's degree",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_College\" rc ON r.resume_id = rc.resume_id JOIN \"Degree\" d ON rc.degree_id = d.degree_id WHERE d.degree_name ILIKE '%bachelor%' OR d.degree_name ILIKE '%b.s.%';"
+  },
+  {
+    "question": "Find all project managers",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Experience\" e ON r.resume_id = e.resume_id JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE jt.title_name ILIKE '%project manager%' OR jt.title_name ILIKE '%project management%';"
+  },
+  {
+    "question": "Get me applicants with a phd degree",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_College\" rc ON r.resume_id = rc.resume_id JOIN \"Degree\" d ON rc.degree_id = d.degree_id WHERE d.degree_name ILIKE '%phd%' OR d.degree_name ILIKE '%doctorate%';"
+  },
+  {
+    "question": "List the resumes with skills in Linux, Ubuntu, and Docker",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r WHERE r.resume_id IN (SELECT rs1.resume_id FROM \"Resume_Skill\" rs1 JOIN \"Skills\" s1 ON rs1.skill_id = s1.skill_id WHERE s1.skill_name = 'Linux' INTERSECT SELECT rs2.resume_id FROM \"Resume_Skill\" rs2 JOIN \"Skills\" s2 ON rs2.skill_id = s2.skill_id WHERE s2.skill_name = 'Ubuntu' INTERSECT SELECT rs3.resume_id FROM \"Resume_Skill\" rs3 JOIN \"Skills\" s3 ON rs3.skill_id = s3.skill_id WHERE s3.skill_name = 'Docker');"
+  },
+  {
+    "question": "",
+    "query": ""
+  },
+  {
+    "question": "",
+    "query": ""
+  },
+  {
+    "question": "",
+    "query": ""
+  },
+  {
+    "question": "",
+    "query": ""
+  },
+  {
+    "question": "",
+    "query": ""
+  }
+]
