@@ -52,12 +52,12 @@
     "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r WHERE r.resume_id IN (SELECT rs1.resume_id FROM \"Resume_Skill\" rs1 JOIN \"Skills\" s1 ON rs1.skill_id = s1.skill_id WHERE s1.skill_name = 'Linux' INTERSECT SELECT rs2.resume_id FROM \"Resume_Skill\" rs2 JOIN \"Skills\" s2 ON rs2.skill_id = s2.skill_id WHERE s2.skill_name = 'Ubuntu' INTERSECT SELECT rs3.resume_id FROM \"Resume_Skill\" rs3 JOIN \"Skills\" s3 ON rs3.skill_id = s3.skill_id WHERE s3.skill_name = 'Docker');"
   },
   {
-    "question": "",
-    "query": ""
+    "question": "Get resumes of applicants who have experience in software development and system administration.",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r WHERE r.resume_id IN (SELECT rs1.resume_id FROM \"Resume_Skill\" rs1 JOIN \"Skills\" s1 ON rs1.skill_id = s1.skill_id WHERE s1.skill_name = 'Software Development' INTERSECT SELECT rs2.resume_id FROM \"Resume_Skill\" rs2 JOIN \"Skills\" s2 ON rs2.skill_id = s2.skill_id WHERE s2.skill_name = 'System Administration');"
   },
   {
-    "question": "",
-    "query": ""
+    "question": "Find resumes of candidates who did not work at a company name",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r WHERE r.resume_id NOT IN (SELECT e.resume_id FROM \"Experience\" e JOIN \"Company\" c ON e.company_id = c.company_id WHERE c.company_name = 'Company Name');"
   },
   {
     "question": "",
