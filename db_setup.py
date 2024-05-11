@@ -13,7 +13,9 @@ def execute_sql_files(connection, sql_files_dir):
 
 
 if __name__ == "__main__":
-    postgres_url = "postgres://tjzpfemc:Jqbyuxw_xlwyrqxHCPUjarS0RDYEonUz@fanny.db.elephantsql.com/tjzpfemc"
+    # postgres_url = "postgres://tjzpfemc:Jqbyuxw_xlwyrqxHCPUjarS0RDYEonUz@fanny.db.elephantsql.com/tjzpfemc"
+    postgres_url = "postgres://myuser:mypassword@localhost:5432/mydatabase"
+
     sql_files_dir = "./databaseFiles"
     schema_name = "public"  # Change this to "public"
     try:
