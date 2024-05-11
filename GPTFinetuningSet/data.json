@@ -60,15 +60,63 @@
     "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r WHERE r.resume_id NOT IN (SELECT e.resume_id FROM \"Experience\" e JOIN \"Company\" c ON e.company_id = c.company_id WHERE c.company_name = 'Company Name');"
   },
   {
-    "question": "",
-    "query": ""
+    "question": "Find all resumes with volunteer experience",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Experience\" e ON r.resume_id = e.resume_id WHERE e.other ILIKE '%volunteer%';"
   },
   {
-    "question": "",
-    "query": ""
+    "question": "Find all resumes with senior-level positions",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Experience\" e ON r.resume_id = e.resume_id JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE jt.title_name ILIKE '%senior%';"
   },
   {
-    "question": "",
-    "query": ""
+    "question": "Find all applicants with cybersecurity or network security skills",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs ON r.resume_id = rs.resume_id JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name LIKE '%cybersecurity%' OR s.skill_name LIKE '%network security%';"
+  },
+  {
+    "question":"Find resumes with automation or scripting skills",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs ON r.resume_id = rs.resume_id JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('automation', 'scripting');"
+  },
+  {
+    "question": "Find applicants who graduated from northwestern university",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_College\" rc ON r.resume_id = rc.resume_id JOIN \"College\" c ON rc.college_id = c.college_id WHERE c.college_name = 'northwestern university';"
+  },
+  {
+    "question": "List all applicants with skills related to web devlepment skills like HTML, CSS, JavaScript, React, or Angular",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs ON r.resume_id = rs.resume_id JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('html', 'css', 'javascript', 'react', 'angular');"
+  },
+  {
+    "question": "Get resumes containing both communication and teamwork skills",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r WHERE r.resume_id IN (SELECT rs.resume_id FROM \"Resume_Skill\" rs JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('communication', 'teamwork') GROUP BY rs.resume_id HAVING COUNT(DISTINCT s.skill_name) = 2);"
+  },
+  {
+    "question": "Get resumes of applicants proficient in Microsoft Word, Excel, Powerpoint, or Outlook",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs ON r.resume_id = rs.resume_id JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('word', 'excel', 'powerpoint', 'outlook');"
+  },
+  {
+    "question": "List resumes with experience in database management systems such as MySQL, PostgreSQL, Oracle, SQL Server, or MongoDB",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs ON r.resume_id = rs.resume_id JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('mysql', 'postgresql', 'oracle', 'sql server', 'mongodb');"
+  },
+  {
+    "question": "Find all applicants with no job experience",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r LEFT JOIN \"Experience\" e ON r.resume_id = e.resume_id WHERE e.resume_id IS NULL;"
+  },
+  {
+    "question": "List all resumes of applicants who worked as product managers",
+    "query": "SELECT DISTINCT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Experience\" e ON r.resume_id = e.resume_id JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE jt.title_name ILIKE '%product manager%' OR jt.title_name ILIKE '%product management%';"
+  },
+  {
+    "question": "How many applicants have experience in both Java and Python",
+    "query": "SELECT COUNT(DISTINCT r.resume_id) AS num_applicants FROM \"Resume\" r WHERE r.resume_id IN ( SELECT rs.resume_id FROM \"Resume_Skill\" rs JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('java', 'python') GROUP BY rs.resume_id HAVING COUNT(DISTINCT s.skill_name) = 2) OR r.resume_id IN (SELECT e.resume_id FROM \"Experience\" e JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE jt.title_name ILIKE '%java%' AND jt.title_name ILIKE '%python%');"
+  },
+  {
+    "question": "Count applicants who have experience in both engineering and manager or director roles",
+    "query": "SELECT COUNT(DISTINCT r.resume_id) AS num_applicants FROM \"Resume\" r WHERE r.resume_id IN (SELECT e.resume_id FROM \"Experience\" e JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE (jt.title_name ILIKE '%engineer%') INTERSECT SELECT e.resume_id FROM \"Experience\" e JOIN \"JobTitle\" jt ON e.job_title_id = jt.job_title_id WHERE (jt.title_name ILIKE '%director%' OR jt.title_name ILIKE '%manager%'));"
+  },
+  {
+    "question": "Count how many resumes have stanford university",
+    "query": "SELECT COUNT(DISTINCT r.resume_id) AS num_resumes FROM \"Resume\" r JOIN \"Resume_College\" rc ON r.resume_id = rc.resume_id JOIN \"College\" c ON rc.college_id = c.college_id WHERE c.college_name = 'stanford university';"
+  },
+  {
+    "question": "Find resumes with foriegn language experience in Spanish, French, or German",
+    "query": "SELECT r.resume_id, r.resume_text FROM \"Resume\" r JOIN \"Resume_Skill\" rs ON r.resume_id = rs.resume_id JOIN \"Skills\" s ON rs.skill_id = s.skill_id WHERE s.skill_name IN ('spanish', 'french', 'german');"
   }
 ]
