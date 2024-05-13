@@ -1,6 +1,6 @@
 import openai
 
-client = openai.OpenAI(api_key="sk-proj-0tNstEib3aEWL7SLXOstT3BlbkFJtZnSh46sYvBofD6d17bY")
+client = openai.OpenAI(api_key="YOUR_API_KEY")
 
 # wait above is done
 fine_tune_results = client.fine_tuning.jobs.retrieve("ftjob-RwB0NjAhSXGIW7HiDzThdiQ2")

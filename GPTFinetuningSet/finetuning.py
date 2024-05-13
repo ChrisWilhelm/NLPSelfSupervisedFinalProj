@@ -1,6 +1,6 @@
 import openai
 
-client = openai.OpenAI(api_key="sk-proj-0tNstEib3aEWL7SLXOstT3BlbkFJtZnSh46sYvBofD6d17bY")
+client = openai.OpenAI(api_key="YOUR_API_KEY")
 
 train_file = client.files.create(file=open("train.jsonl", "rb"), purpose="fine-tune")
 validation_file = client.files.create(file=open("validation.jsonl", "rb"), purpose="fine-tune")

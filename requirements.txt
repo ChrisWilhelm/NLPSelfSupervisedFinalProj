@@ -1,0 +1,6 @@
+spacy
+pandas
+tqdm
+psycopg2
+scikit-learn
+openai
