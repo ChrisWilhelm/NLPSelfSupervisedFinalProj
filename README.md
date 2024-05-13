@@ -26,6 +26,8 @@ Here, data.json contains the dataset. You can run train_validate.py to split the
 
 Then, generate an OpenAI API key and run finetuning.py to finetune a model.
 
+You will then need to get the jobId of your generation and paste it into runModel.py
+
 You can run this model using runModel.py for a specific query.
 
 Ensure that you have pasted your API key into the scripts.
